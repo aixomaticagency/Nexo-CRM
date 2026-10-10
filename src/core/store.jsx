@@ -145,6 +145,7 @@ export const useStore = () => useContext(Ctx);
 export function useSchema() {
   const { config } = useStore();
   return useMemo(() => {
+    if (!config) return { stageById: {}, statusByName: {}, typeByName: {}, recurring: null, T: null };
     const stageById = Object.fromEntries(config.stages.map((s) => [s.id, s]));
     const statusByName = Object.fromEntries(config.contactStatuses.map((s) => [s.name, s]));
     const typeByName = Object.fromEntries(config.taskTypes.map((s) => [s.name, s]));
